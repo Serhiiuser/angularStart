@@ -13,6 +13,7 @@ export class PostsComponent implements OnInit {
 
   ngOnInit(): void {
     this.postServise.getPosts().subscribe(value => this.posts=value)
+    console.log(this.posts)
   }
 
 }
