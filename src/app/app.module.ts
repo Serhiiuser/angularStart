@@ -1,39 +1,26 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
-import {AppComponent} from './app.component';
-import {UsersComponent} from './users/users.component';
+import {AppComponent} from './componenet/app/app.component';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {UserComponent} from './user/user.component';
 import {RouterModule, Routes} from "@angular/router";
-import {PostsComponent} from './posts/posts.component';
-import {UserDetailsComponent} from './user-details/user-details.component';
-import { PostComponent } from './posts/post/post.component';
-import { PostDetailsComponent } from './post-details/post-details.component';
+import { HomeComponent } from './componenet/home/home.component';
 
-let routes: Routes;
-routes = [
-  {
-    path: 'users', component: UsersComponent, children: [
-      {path: ':id', component: UserDetailsComponent}
-    ]
-  },
 
-  {path: 'posts', component: PostsComponent},
 
-  {path: 'posts/:id', component: PostDetailsComponent}
+let routes: Routes =[
+
+  {path: 'home',component:HomeComponent},
+  {path: 'users', loadChildren:() => import('./modules/user/user.module').then(m =>m.UserModule)},
+  {path: 'posts', loadChildren:() => import('./post-modules/posts/post.module').then(m =>m.PostModule)},
 
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    UsersComponent,
-    UserComponent,
-    PostsComponent,
-    UserDetailsComponent,
-    PostComponent,
-    PostDetailsComponent
+    HomeComponent,
+
+
   ],
   imports: [
     BrowserModule,
